@@ -1,0 +1,572 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   TJ Policy Debate — constructivist design system
+
+   The visual language borrows from Russian constructivist poster design:
+   hard edges, flat colour, heavy condensed type, thick structural rules, bold
+   diagonals, and oversized numerals used as graphic elements. Nothing here
+   fades, blurs, or rounds — a corner is either square or it is a deliberate
+   exception.
+
+   Colour is allocated 60 / 30 / 10:
+     60%  paper        the dominant ground almost everything sits on
+     30%  navy         structure — panels, navigation, rules, type
+     10%  signal       reserved for calls to action and nothing else
+
+   Navy (#1B3A93, from the team's own seal) and paper carry the identity;
+   signal amber appears only where we want a click. If an element is amber and
+   is not a call to action, that is a bug.
+   ========================================================================== */
+
+@theme {
+  /* ---- 60%: paper -------------------------------------------------------- */
+  --color-paper: #f1eee4;
+  --color-paper-raised: #f8f6f0;
+  --color-paper-sunk: #e7e2d4;
+
+  /* ---- 30%: navy --------------------------------------------------------- */
+  --color-navy-950: #070d21;
+  --color-navy-900: #0d1735;
+  --color-navy-800: #12224f;
+  --color-navy-700: #172c66;
+  --color-navy-600: #1b3a93;
+  --color-navy-500: #2b53c4;
+  --color-navy-300: #8fa4dd;
+  --color-navy-200: #c2cdeb;
+  --color-navy-100: #dfe5f5;
+
+  /* ---- 10%: signal ------------------------------------------------------- */
+  --color-signal: #f0a91d;
+  --color-signal-deep: #cf8908;
+  --color-signal-pale: #fbe7bd;
+
+  /* ---- ink & structure --------------------------------------------------- */
+  --color-ink: #0c1020;
+  --color-ink-soft: #40465c;
+  --color-rule: #0d1735;
+  --color-rule-faint: #cdc6b4;
+
+  /* ---- status ------------------------------------------------------------ */
+  --color-good: #0f6b3f;
+  --color-good-pale: #d9ecdf;
+  --color-warn: #9a5b00;
+  --color-warn-pale: #fbe7bd;
+  --color-bad: #a3181a;
+  --color-bad-pale: #f6d9d6;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Constructivism does not round corners. */
+  --radius-none: 0px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  color-scheme: light;
+  --header-height: 80px;
+
+  /* Structural rule weights, used consistently so the grid reads as a system. */
+  --rule-hair: 1px;
+  --rule: 2px;
+  --rule-bold: 4px;
+  --rule-heavy: 8px;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + 32px);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    /* Body copy is never below 16px, and never tighter than 1.6. */
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    /* Display type is set tight — the scale contrast against body copy is the
+       whole point, so headings must feel compressed and structural. */
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    letter-spacing: -0.04em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* One focus treatment, everywhere, never removed. */
+  :focus-visible {
+    outline: var(--rule-bold) solid var(--color-signal);
+    outline-offset: 2px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-signal);
+  }
+
+  ::selection {
+    background-color: var(--color-navy-600);
+    color: #fff;
+  }
+
+  /* Wide content scrolls inside its own frame, never the page. */
+  .table-scroll {
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+}
+
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+
+@layer components {
+  /* Every page's main content sits inside this. 1400px cap, generous gutters. */
+  .u-container {
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .u-container {
+      padding-inline: 48px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .u-container {
+      padding-inline: 64px;
+    }
+  }
+
+  /* Section rhythm — deliberately roomy. Whitespace is a design element here,
+     not leftover space. */
+  .u-section {
+    padding-block: 96px;
+  }
+
+  @media (min-width: 768px) {
+    .u-section {
+      padding-block: 140px;
+    }
+  }
+
+  .u-section-tight {
+    padding-block: 64px;
+  }
+
+  @media (min-width: 768px) {
+    .u-section-tight {
+      padding-block: 96px;
+    }
+  }
+
+  /* The 12-column bed. Children opt into spans with Tailwind col-span-*. */
+  .u-grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  @media (min-width: 1024px) {
+    .u-grid-12 {
+      gap: 40px;
+    }
+  }
+}
+
+/* ==========================================================================
+   Constructivist elements
+   ========================================================================== */
+
+@layer components {
+  /* --- micro label: uppercase, wide tracking, sits above headings --------- */
+  .c-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-navy-600);
+  }
+
+  /* The bar that precedes a label — a constructivist tick mark. */
+  .c-label::before {
+    content: "";
+    width: 40px;
+    height: var(--rule-bold);
+    background: var(--color-signal);
+    flex: none;
+  }
+
+  .on-dark .c-label {
+    color: var(--color-signal);
+  }
+
+  .on-dark .c-label::before {
+    background: var(--color-signal);
+  }
+
+  /* --- structural rules --------------------------------------------------- */
+  .c-rule {
+    height: var(--rule-bold);
+    background: var(--color-rule);
+    border: 0;
+  }
+
+  .c-rule-heavy {
+    height: var(--rule-heavy);
+    background: var(--color-navy-600);
+    border: 0;
+  }
+
+  .c-rule-signal {
+    height: var(--rule-heavy);
+    background: var(--color-signal);
+    border: 0;
+  }
+
+  /* --- oversized numeral used to index sections and steps ----------------- */
+  .c-numeral {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    color: var(--color-navy-600);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* --- diagonal accent bar: the signature constructivist gesture ---------- */
+  .c-diagonal {
+    position: absolute;
+    background: var(--color-signal);
+    transform: rotate(-24deg);
+    transform-origin: center;
+    pointer-events: none;
+  }
+
+  /* --- hard-edged panel of flat navy -------------------------------------- */
+  .c-panel {
+    background: var(--color-navy-800);
+    color: #fff;
+  }
+
+  /* --- outlined frame ------------------------------------------------------ */
+  .c-frame {
+    border: var(--rule) solid var(--color-rule);
+    background: var(--color-paper-raised);
+  }
+
+  /* A frame that reads as clickable: the signal bar slides in on hover. */
+  .c-frame-link {
+    position: relative;
+    display: block;
+    border: var(--rule) solid var(--color-rule);
+    background: var(--color-paper-raised);
+    transition: transform 160ms var(--ease-out-soft), box-shadow 160ms var(--ease-out-soft);
+  }
+
+  .c-frame-link::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: var(--rule-bold);
+    background: var(--color-signal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 200ms var(--ease-out-soft);
+  }
+
+  .c-frame-link:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0 0 var(--color-navy-600);
+  }
+
+  .c-frame-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-frame-link:hover {
+      transform: none;
+    }
+  }
+
+  /* --- the printed grid texture behind dark panels ------------------------ */
+  .c-grid-texture {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) var(--rule-hair), transparent var(--rule-hair)),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) var(--rule-hair), transparent var(--rule-hair));
+    background-size: 80px 80px;
+  }
+
+  .c-grid-texture-dark {
+    background-image:
+      linear-gradient(to right, rgba(13, 23, 53, 0.08) var(--rule-hair), transparent var(--rule-hair)),
+      linear-gradient(to bottom, rgba(13, 23, 53, 0.08) var(--rule-hair), transparent var(--rule-hair));
+    background-size: 80px 80px;
+  }
+
+  /* --- square checkbox ----------------------------------------------------
+     appearance:none strips the native tick along with the native rounding, so
+     the mark is drawn back in as a background image on :checked. */
+  .c-checkbox {
+    appearance: none;
+    background-color: var(--color-paper-raised);
+    border: var(--rule) solid var(--color-rule);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 78%;
+  }
+
+  .c-checkbox:checked {
+    background-color: var(--color-signal);
+    border-color: var(--color-ink);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230c1020' stroke-width='4' stroke-linecap='square'%3E%3Cpath d='M5 12.5 10 17.5 19 7'/%3E%3C/svg%3E");
+  }
+
+  .c-checkbox:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* --- repeating diagonal hatch, for edges and empty states --------------- */
+  .c-hatch {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--color-navy-600) 0,
+      var(--color-navy-600) 2px,
+      transparent 2px,
+      transparent 10px
+    );
+  }
+}
+
+/* ==========================================================================
+   Type scale — stark separation between display and body
+   ========================================================================== */
+
+@layer components {
+  .t-display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.75rem, 8vw, 7rem);
+    line-height: 0.86;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+  }
+
+  .t-h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+
+  .t-h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.4vw, 3rem);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .t-h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.125rem, 1.6vw, 1.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  /* Body copy: 16px floor, 1.6 leading, secondary text carried by opacity
+     rather than a lighter grey, so contrast stays rich. */
+  .t-body {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+  }
+
+  .t-body-lg {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+  }
+
+  .t-muted {
+    color: var(--color-ink);
+    opacity: 0.62;
+  }
+
+  .on-dark .t-muted {
+    color: #fff;
+    opacity: 0.68;
+  }
+}
+
+/* ==========================================================================
+   Rendered news bodies — scoped so markdown output cannot restyle the app
+   ========================================================================== */
+
+@layer components {
+  .prose-news {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-ink);
+  }
+
+  .prose-news > * + * {
+    margin-top: 1.4em;
+  }
+
+  .prose-news h2 {
+    font-size: 1.875rem;
+    margin-top: 2em;
+  }
+
+  .prose-news h3 {
+    font-size: 1.375rem;
+    margin-top: 1.75em;
+  }
+
+  .prose-news h4 {
+    font-size: 1.0625rem;
+    margin-top: 1.5em;
+  }
+
+  .prose-news a {
+    color: var(--color-navy-600);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .prose-news a:hover {
+    background: var(--color-signal);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .prose-news ul,
+  .prose-news ol {
+    padding-left: 1.4em;
+  }
+
+  .prose-news ul {
+    list-style: square;
+  }
+
+  .prose-news ol {
+    list-style: decimal;
+  }
+
+  .prose-news li::marker {
+    color: var(--color-signal-deep);
+  }
+
+  .prose-news li + li {
+    margin-top: 0.5em;
+  }
+
+  .prose-news blockquote {
+    border-left: var(--rule-heavy) solid var(--color-signal);
+    padding: 0.25em 0 0.25em 1.4em;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .prose-news code {
+    background: var(--color-navy-100);
+    border: var(--rule-hair) solid var(--color-navy-200);
+    padding: 0.1em 0.4em;
+    font-size: 0.9em;
+  }
+
+  .prose-news hr {
+    border: 0;
+    border-top: var(--rule-bold) solid var(--color-rule);
+  }
+}
+
+/* ==========================================================================
+   Reduced motion — content must end up visible, never mid-fade
+   ========================================================================== */
+
+@layer components {
+  /* Scroll reveal, driven by components/ui/Reveal.tsx toggling data-revealed. */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 620ms var(--ease-out-soft),
+      transform 620ms var(--ease-out-soft);
+  }
+
+  [data-reveal][data-revealed="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
