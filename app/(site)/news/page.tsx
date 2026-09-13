@@ -46,7 +46,7 @@ export default async function NewsIndexPage() {
                 <div className="u-grid-12 items-end">
                   <div className="col-span-12 lg:col-span-9">
                     <div className="flex flex-wrap items-center gap-5">
-                      <span className="bg-signal px-3 py-1.5 font-display text-[11px] font-extrabold uppercase tracking-[0.18em] text-ink">
+                      <span className="bg-signal px-3 py-1.5 font-display text-[11px] font-extrabold uppercase tracking-[0.18em] text-paper">
                         Latest
                       </span>
                       <time

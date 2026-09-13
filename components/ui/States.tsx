@@ -26,7 +26,7 @@ export function EmptyState({
           rather than broken. */}
       <div className="c-hatch absolute inset-x-0 top-0 h-2 opacity-30" aria-hidden="true" />
       {icon ? (
-        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center border-2 border-rule bg-signal text-ink">
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center border-2 border-rule bg-signal text-paper">
           {icon}
         </div>
       ) : null}

@@ -92,7 +92,7 @@ function Stat({ label, value }: { label: string; value: number }) {
       <dd className="font-display text-5xl font-extrabold tabular-nums leading-none text-white">
         <CountUp value={value} />
       </dd>
-      <dt className="mt-5 font-display text-[11px] font-bold uppercase tracking-[0.18em] text-signal">{label}</dt>
+      <dt className="mt-5 font-display text-[11px] font-bold uppercase tracking-[0.18em] text-signal-bright">{label}</dt>
     </div>
   );
 }

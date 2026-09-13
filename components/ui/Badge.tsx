@@ -23,7 +23,7 @@ const tones: Record<Tone, string> = {
   good: "border-good bg-good-pale text-good",
   warn: "border-warn bg-warn-pale text-warn",
   bad: "border-bad bg-bad-pale text-bad",
-  signal: "border-ink bg-signal text-ink",
+  signal: "border-ink bg-signal text-paper",
 };
 
 export function Badge({

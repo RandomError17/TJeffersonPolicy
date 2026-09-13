@@ -40,7 +40,7 @@ export default function NotFound() {
           </div>
           <p className="mt-16 border-t-2 border-white/15 pt-8 text-sm text-white/50">
             Looking for the team portal?{" "}
-            <Link href="/signin" className="border-b-2 border-signal font-semibold text-white hover:bg-signal hover:text-ink">
+            <Link href="/signin" className="border-b-2 border-signal font-semibold text-white hover:bg-signal hover:text-paper">
               Sign in here
             </Link>
             .

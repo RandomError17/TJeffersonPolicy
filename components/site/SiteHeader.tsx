@@ -84,7 +84,7 @@ export function SiteHeader({
           </span>
           <span className="font-display text-sm font-extrabold uppercase leading-[1.05] tracking-[0.02em] text-white">
             TJ Policy
-            <span className="block text-signal">Debate</span>
+            <span className="block text-signal-bright">Debate</span>
           </span>
         </Link>
 
@@ -121,7 +121,7 @@ export function SiteHeader({
           </Link>
           <Link
             href="/join"
-            className="hidden border-2 border-ink bg-signal px-6 py-3.5 font-display text-[11px] font-bold uppercase tracking-[0.16em] text-ink transition-transform duration-150 hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[4px_4px_0_0_#fff] motion-reduce:hover:translate-x-0 motion-reduce:hover:translate-y-0 sm:block"
+            className="hidden border-2 border-ink bg-signal text-paper px-6 py-3.5 font-display text-[11px] font-bold uppercase tracking-[0.16em] transition-transform duration-150 hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[4px_4px_0_0_#fff] motion-reduce:hover:translate-x-0 motion-reduce:hover:translate-y-0 sm:block"
           >
             Join
           </Link>
@@ -185,7 +185,7 @@ export function SiteHeader({
             <Link
               href="/join"
               onClick={() => setMenuOpen(false)}
-              className="border-2 border-ink bg-signal px-6 py-4 text-center font-display text-xs font-bold uppercase tracking-[0.16em] text-ink"
+              className="border-2 border-ink bg-signal text-paper px-6 py-4 text-center font-display text-xs font-bold uppercase tracking-[0.16em]"
             >
               Join the team
             </Link>

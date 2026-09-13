@@ -94,7 +94,7 @@ export function FilterBar({
         <button
           type="button"
           onClick={() => router.replace(pathname, { scroll: false })}
-          className="min-h-[52px] border-2 border-transparent px-4 font-display text-xs font-bold uppercase tracking-[0.12em] text-ink/60 transition-colors hover:border-ink hover:bg-signal hover:text-ink"
+          className="min-h-[52px] border-2 border-transparent px-4 font-display text-xs font-bold uppercase tracking-[0.12em] text-ink/60 transition-colors hover:border-ink hover:bg-signal hover:text-paper"
         >
           Clear
         </button>

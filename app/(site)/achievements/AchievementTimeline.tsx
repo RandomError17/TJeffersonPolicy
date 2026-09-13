@@ -22,7 +22,7 @@ export interface AchievementView {
 const LEVEL_ORDER = ["NATIONAL", "STATE", "REGIONAL", "INVITATIONAL", "LOCAL"] as const;
 
 const levelStyles: Record<string, string> = {
-  NATIONAL: "bg-signal text-ink",
+  NATIONAL: "bg-signal text-paper",
   STATE: "bg-navy-600 text-white",
   REGIONAL: "bg-navy-500 text-white",
   INVITATIONAL: "bg-navy-100 text-navy-800",
@@ -200,7 +200,7 @@ function FilterChip({ active, onClick, children }: { active: boolean; onClick: (
         "min-h-[44px] border-2 px-5 font-display text-xs font-bold uppercase tracking-[0.12em] transition-colors",
         active
           ? "border-ink bg-navy-800 text-white"
-          : "border-rule-faint bg-paper-raised text-ink hover:border-ink hover:bg-signal",
+          : "border-rule-faint bg-paper-raised text-ink hover:border-ink hover:bg-signal hover:text-paper",
       )}
     >
       {children}

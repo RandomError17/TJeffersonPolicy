@@ -181,7 +181,7 @@ const CookieNotice = forwardRef<HTMLDivElement>(function CookieNotice(_props, re
           or tracking cookies, and our traffic analytics stores no cookie or device identifier.{" "}
           <Link
             href="/privacy"
-            className="border-b-2 border-signal font-semibold text-white hover:bg-signal hover:text-ink"
+            className="border-b-2 border-signal font-semibold text-white hover:bg-signal hover:text-paper"
           >
             Read the privacy policy
           </Link>
@@ -190,7 +190,7 @@ const CookieNotice = forwardRef<HTMLDivElement>(function CookieNotice(_props, re
         <button
           type="button"
           onClick={acknowledge}
-          className="min-h-[48px] shrink-0 self-start border-2 border-ink bg-signal px-8 font-display text-xs font-bold uppercase tracking-[0.16em] text-ink transition-[transform,box-shadow] duration-150 hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[5px_5px_0_0_var(--color-paper)] motion-reduce:hover:translate-x-0 motion-reduce:hover:translate-y-0 md:self-auto"
+          className="min-h-[48px] shrink-0 self-start border-2 border-ink bg-signal px-8 font-display text-xs font-bold uppercase tracking-[0.16em] text-paper transition-[transform,box-shadow] duration-150 hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[5px_5px_0_0_var(--color-paper)] motion-reduce:hover:translate-x-0 motion-reduce:hover:translate-y-0 md:self-auto"
         >
           Got it
         </button>
@@ -220,7 +220,7 @@ const StickyJoinBar = forwardRef<HTMLDivElement, { shown: boolean }>(function St
       <Link
         href="/join"
         tabIndex={shown ? undefined : -1}
-        className="flex min-h-[60px] items-center justify-center gap-3 px-6 font-display text-sm font-bold uppercase tracking-[0.14em] text-ink"
+        className="flex min-h-[60px] items-center justify-center gap-3 px-6 font-display text-sm font-bold uppercase tracking-[0.14em] text-paper"
       >
         Join the team
         <span aria-hidden="true">→</span>

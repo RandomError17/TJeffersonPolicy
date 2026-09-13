@@ -128,6 +128,6 @@ function chip(active: boolean) {
     "inline-flex min-h-[44px] items-center border-2 px-4 font-display text-[11px] font-bold uppercase tracking-[0.12em]",
     active
       ? "border-ink bg-navy-800 text-white"
-      : "border-rule-faint bg-paper-raised text-ink hover:border-ink hover:bg-signal",
+      : "border-rule-faint bg-paper-raised text-ink hover:border-ink hover:bg-signal hover:text-paper",
   ].join(" ");
 }

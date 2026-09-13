@@ -125,7 +125,7 @@ export default function AboutPage() {
                     href={meeting.ionActivityUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-7 inline-flex items-center gap-2 border-b-2 border-signal pb-1 font-display text-sm font-bold uppercase tracking-[0.14em] text-navy-600 transition-colors hover:bg-signal hover:text-ink"
+                    className="mt-7 inline-flex items-center gap-2 border-b-2 border-signal pb-1 font-display text-sm font-bold uppercase tracking-[0.14em] text-navy-600 transition-colors hover:bg-signal hover:text-paper"
                   >
                     Activity page on Ion <span aria-hidden="true">↗</span>
                   </a>
@@ -140,7 +140,7 @@ export default function AboutPage() {
               {SEASON_PHASES.map((phase, index) => (
                 <li key={phase.window} className="relative pb-10 last:pb-0">
                   <span
-                    className="absolute -left-[42px] top-1 flex h-6 w-6 items-center justify-center bg-signal font-display text-[11px] font-extrabold text-ink"
+                    className="absolute -left-[42px] top-1 flex h-6 w-6 items-center justify-center bg-signal font-display text-[11px] font-extrabold text-paper"
                     aria-hidden="true"
                   >
                     {index + 1}
@@ -167,7 +167,7 @@ export default function AboutPage() {
               Officers answer questions from prospective members, current debaters, and parents. Reach the team at{" "}
               <a
                 href={`mailto:${CLUB.email}`}
-                className="border-b-2 border-signal font-semibold text-white hover:bg-signal hover:text-ink"
+                className="border-b-2 border-signal font-semibold text-white hover:bg-signal hover:text-paper"
               >
                 {CLUB.email}
               </a>

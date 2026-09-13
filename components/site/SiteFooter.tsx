@@ -48,7 +48,7 @@ export async function SiteFooter() {
               </span>
               <span className="font-display text-xl font-extrabold uppercase leading-[1.02] tracking-tight">
                 TJ Policy
-                <span className="block text-signal">Debate</span>
+                <span className="block text-signal-bright">Debate</span>
               </span>
             </div>
 
@@ -68,7 +68,7 @@ export async function SiteFooter() {
 
           {NAV_COLUMNS.map((column) => (
             <nav key={column.heading} aria-label={column.heading} className="col-span-6 lg:col-span-2">
-              <h2 className="font-display text-[11px] font-bold uppercase tracking-[0.2em] text-signal">
+              <h2 className="font-display text-[11px] font-bold uppercase tracking-[0.2em] text-signal-bright">
                 {column.heading}
               </h2>
               <ul className="mt-7 space-y-4">
@@ -76,7 +76,7 @@ export async function SiteFooter() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-base text-white/70 transition-colors hover:text-signal"
+                      className="text-base text-white/70 transition-colors hover:text-signal-bright"
                     >
                       {link.label}
                     </Link>
@@ -87,7 +87,7 @@ export async function SiteFooter() {
           ))}
 
           <div className="col-span-12 lg:col-span-3">
-            <h2 className="font-display text-[11px] font-bold uppercase tracking-[0.2em] text-signal">Connect</h2>
+            <h2 className="font-display text-[11px] font-bold uppercase tracking-[0.2em] text-signal-bright">Connect</h2>
             <ul className="mt-7 flex flex-wrap gap-3">
               {socials.map((social) => (
                 <li key={social.label}>
@@ -105,7 +105,7 @@ export async function SiteFooter() {
             </ul>
             <a
               href={`mailto:${settings["club.email"]}`}
-              className="mt-7 inline-block break-all text-base text-white/70 underline decoration-signal decoration-2 underline-offset-[6px] transition-colors hover:text-signal"
+              className="mt-7 inline-block break-all text-base text-white/70 underline decoration-signal decoration-2 underline-offset-[6px] transition-colors hover:text-signal-bright"
             >
               {settings["club.email"]}
             </a>
@@ -118,12 +118,12 @@ export async function SiteFooter() {
           </p>
           <ul className="flex flex-wrap items-center gap-x-7 gap-y-3 font-display text-xs font-bold uppercase tracking-[0.16em]">
             <li>
-              <Link href="/privacy" className="transition-colors hover:text-signal">
+              <Link href="/privacy" className="transition-colors hover:text-signal-bright">
                 Privacy
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="transition-colors hover:text-signal">
+              <Link href="/terms" className="transition-colors hover:text-signal-bright">
                 Terms
               </Link>
             </li>
@@ -134,7 +134,7 @@ export async function SiteFooter() {
               href={EXTERNAL_LINKS.ion}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline decoration-signal decoration-2 underline-offset-4 hover:text-signal"
+              className="underline decoration-signal decoration-2 underline-offset-4 hover:text-signal-bright"
             >
               TJ Ion
             </a>

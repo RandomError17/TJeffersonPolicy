@@ -23,7 +23,7 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "border-ink bg-signal text-ink hover:-translate-x-[3px] hover:-translate-y-[3px] " +
+    "border-ink bg-signal text-paper hover:-translate-x-[3px] hover:-translate-y-[3px] " +
     "hover:shadow-[5px_5px_0_0_var(--color-ink)]",
   solid:
     "border-navy-800 bg-navy-800 text-white hover:-translate-x-[3px] hover:-translate-y-[3px] " +

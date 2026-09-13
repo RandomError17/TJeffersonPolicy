@@ -21,7 +21,8 @@ export const contentType = "image/png";
  */
 export default function OpengraphImage() {
   const navy = "#0d1735";
-  const signal = "#f0a91d";
+  const signal = "#c4271b";
+  const signalBright = "#ff6b52";
   const paper = "#f1eee4";
 
   return new ImageResponse(
@@ -69,7 +70,7 @@ export default function OpengraphImage() {
           <div style={{ width: 56, height: 8, background: signal }} />
           <div
             style={{
-              color: signal,
+              color: signalBright,
               fontSize: 22,
               fontWeight: 700,
               letterSpacing: "0.22em",
@@ -94,7 +95,7 @@ export default function OpengraphImage() {
             }}
           >
             <span>Jefferson</span>
-            <span style={{ color: signal }}>Policy</span>
+            <span style={{ color: signalBright }}>Policy</span>
             <span>Debate</span>
           </div>
         </div>

@@ -112,7 +112,7 @@ export default async function JoinPage() {
                   <a
                     href={step.href}
                     {...(/^https?:/.test(step.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="mt-7 inline-flex items-center gap-2 border-b-2 border-signal pb-1 font-display text-sm font-bold uppercase tracking-[0.14em] text-navy-600 transition-colors hover:bg-signal hover:text-ink"
+                    className="mt-7 inline-flex items-center gap-2 border-b-2 border-signal pb-1 font-display text-sm font-bold uppercase tracking-[0.14em] text-navy-600 transition-colors hover:bg-signal hover:text-paper"
                   >
                     {step.hrefLabel}
                     <span aria-hidden="true">{/^https?:/.test(step.href) ? "↗" : "→"}</span>
@@ -162,7 +162,7 @@ export default async function JoinPage() {
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg font-bold uppercase tracking-tight text-ink marker:content-none">
                 {item.q}
                 <span
-                  className="flex h-9 w-9 shrink-0 items-center justify-center border-2 border-rule text-xl font-normal leading-none text-navy-600 transition-transform duration-200 group-open:rotate-45 group-open:bg-signal group-open:text-ink"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center border-2 border-rule text-xl font-normal leading-none text-navy-600 transition-transform duration-200 group-open:rotate-45 group-open:bg-signal group-open:text-paper"
                   aria-hidden="true"
                 >
                   +
@@ -178,7 +178,7 @@ export default async function JoinPage() {
             Still unsure? Email{" "}
             <a
               href={`mailto:${settings["club.email"]}`}
-              className="border-b-2 border-signal font-semibold text-ink hover:bg-signal"
+              className="border-b-2 border-signal font-semibold text-ink hover:bg-signal hover:text-paper"
             >
               {settings["club.email"]}
             </a>{" "}

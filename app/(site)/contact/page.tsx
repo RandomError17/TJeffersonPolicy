@@ -107,7 +107,7 @@ export default async function ContactPage() {
                 href={EXTERNAL_LINKS.ion}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-b-2 border-signal font-semibold text-ink hover:bg-signal"
+                className="border-b-2 border-signal font-semibold text-ink hover:bg-signal hover:text-paper"
               >
                 Ion
               </a>{" "}

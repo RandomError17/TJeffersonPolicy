@@ -15,8 +15,17 @@
      10%  signal       reserved for calls to action and nothing else
 
    Navy (#1B3A93, from the team's own seal) and paper carry the identity;
-   signal amber appears only where we want a click. If an element is amber and
+   signal red appears only where we want a click. If an element is red and
    is not a call to action, that is a bug.
+
+   Signal has two faces because one hue can't do both jobs: `--color-signal`
+   is the true poster red — saturated enough to carry a button fill or a
+   diagonal bar, but too dark to read as small text against navy.
+   `--color-signal-bright` is a lighter coral-red reserved *only* for signal
+   used as text or an icon glyph sitting directly on a navy ground (eyebrows,
+   the header/footer wordmark) — the on-dark equivalent of what amber did for
+   free by being naturally light. Fills and borders never use -bright; on-dark
+   text never uses the base signal.
    ========================================================================== */
 
 @theme {
@@ -37,9 +46,10 @@
   --color-navy-100: #dfe5f5;
 
   /* ---- 10%: signal ------------------------------------------------------- */
-  --color-signal: #f0a91d;
-  --color-signal-deep: #cf8908;
-  --color-signal-pale: #fbe7bd;
+  --color-signal: #c4271b;
+  --color-signal-bright: #ff6b52;
+  --color-signal-deep: #7a1911;
+  --color-signal-pale: #f3d7d1;
 
   /* ---- ink & structure --------------------------------------------------- */
   --color-ink: #0c1020;
@@ -125,7 +135,7 @@
   }
 
   .on-dark :focus-visible {
-    outline-color: var(--color-signal);
+    outline-color: var(--color-signal-bright);
   }
 
   ::selection {
@@ -229,11 +239,11 @@
   }
 
   .on-dark .c-label {
-    color: var(--color-signal);
+    color: var(--color-signal-bright);
   }
 
   .on-dark .c-label::before {
-    background: var(--color-signal);
+    background: var(--color-signal-bright);
   }
 
   /* --- structural rules --------------------------------------------------- */
@@ -353,7 +363,7 @@
   .c-checkbox:checked {
     background-color: var(--color-signal);
     border-color: var(--color-ink);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230c1020' stroke-width='4' stroke-linecap='square'%3E%3Cpath d='M5 12.5 10 17.5 19 7'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f1eee4' stroke-width='4' stroke-linecap='square'%3E%3Cpath d='M5 12.5 10 17.5 19 7'/%3E%3C/svg%3E");
   }
 
   .c-checkbox:disabled {
@@ -503,7 +513,7 @@
 
   .legal-link:hover {
     background: var(--color-signal);
-    color: var(--color-ink);
+    color: var(--color-paper);
     text-decoration: none;
   }
 
@@ -567,7 +577,7 @@
 
   .prose-news a:hover {
     background: var(--color-signal);
-    color: var(--color-ink);
+    color: var(--color-paper);
     text-decoration: none;
   }
 

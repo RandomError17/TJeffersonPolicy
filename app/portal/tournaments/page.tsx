@@ -123,7 +123,7 @@ export default async function TournamentsPage({ searchParams }: PageProps) {
             "The officer team enters the squad on Tabroom and posts logistics in the Facebook group.",
           ].map((step, index) => (
             <li key={step} className="bg-navy-800 p-7">
-              <span className="font-display text-2xl font-extrabold leading-none text-signal" aria-hidden="true">
+              <span className="font-display text-2xl font-extrabold leading-none text-signal-bright" aria-hidden="true">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <p className="t-body mt-5 text-white/75">{step}</p>
@@ -134,7 +134,7 @@ export default async function TournamentsPage({ searchParams }: PageProps) {
           Plans changed? Withdraw from{" "}
           <Link
             href="/portal/registrations"
-            className="border-b-2 border-signal font-semibold text-white hover:bg-signal hover:text-ink"
+            className="border-b-2 border-signal font-semibold text-white hover:bg-signal hover:text-paper"
           >
             My registrations
           </Link>{" "}
@@ -161,7 +161,7 @@ function TabLink({ href, active, children }: { href: string; active: boolean; ch
       className={
         active
           ? "flex min-h-[48px] items-center bg-navy-800 px-6 font-display text-xs font-bold uppercase tracking-[0.12em] text-white"
-          : "flex min-h-[48px] items-center px-6 font-display text-xs font-bold uppercase tracking-[0.12em] text-ink/60 hover:bg-signal hover:text-ink"
+          : "flex min-h-[48px] items-center px-6 font-display text-xs font-bold uppercase tracking-[0.12em] text-ink/60 hover:bg-signal hover:text-paper"
       }
     >
       {children}

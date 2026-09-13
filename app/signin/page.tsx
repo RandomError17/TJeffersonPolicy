@@ -107,20 +107,20 @@ export default async function SignInPage({ searchParams }: PageProps) {
 
               <div className="mt-10 border-t-2 border-rule pt-7 text-sm text-ink/70">
                 Not on the team yet?{" "}
-                <Link href="/join" className="border-b-2 border-signal font-semibold text-ink hover:bg-signal">
+                <Link href="/join" className="border-b-2 border-signal font-semibold text-ink hover:bg-signal hover:text-paper">
                   See how to join
                 </Link>
               </div>
             </div>
 
             <p className="mt-8 font-display text-[11px] font-bold uppercase tracking-[0.16em] text-white/45">
-              <Link href="/" className="hover:text-signal">
+              <Link href="/" className="hover:text-signal-bright">
                 ← Back to the public site
               </Link>
               <span className="mx-3" aria-hidden="true">
                 ·
               </span>
-              <a href={EXTERNAL_LINKS.ion} target="_blank" rel="noopener noreferrer" className="hover:text-signal">
+              <a href={EXTERNAL_LINKS.ion} target="_blank" rel="noopener noreferrer" className="hover:text-signal-bright">
                 TJ Ion
               </a>
             </p>

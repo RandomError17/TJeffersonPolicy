@@ -84,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-[100] focus:bg-signal focus:px-6 focus:py-4 focus:font-display focus:text-sm focus:font-bold focus:uppercase focus:tracking-widest focus:text-ink"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-[100] focus:bg-signal focus:px-6 focus:py-4 focus:font-display focus:text-sm focus:font-bold focus:uppercase focus:tracking-widest focus:text-paper"
         >
           Skip to main content
         </a>

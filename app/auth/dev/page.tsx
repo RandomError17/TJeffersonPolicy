@@ -90,7 +90,7 @@ export default async function DevSignInPage({ searchParams }: { searchParams: Pr
           <p className="mt-10 border-t-2 border-rule pt-7 text-center">
             <Link
               href="/signin"
-              className="border-b-2 border-signal pb-1 font-display text-xs font-bold uppercase tracking-[0.16em] text-navy-600 hover:bg-signal hover:text-ink"
+              className="border-b-2 border-signal pb-1 font-display text-xs font-bold uppercase tracking-[0.16em] text-navy-600 hover:bg-signal hover:text-paper"
             >
               ← Back to sign-in
             </Link>

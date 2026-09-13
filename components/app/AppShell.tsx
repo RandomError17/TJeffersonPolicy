@@ -26,7 +26,7 @@ export interface NavGroup {
  *
  * The dashboard carries the same constructivist language as the public site,
  * but inverted: navigation is a solid navy column — the 30% structural colour —
- * against the paper working area, with signal amber reserved for the active
+ * against the paper working area, with signal red reserved for the active
  * item and nothing else. Work happens on paper; structure is navy.
  */
 export function AppShell({
@@ -76,7 +76,7 @@ export function AppShell({
       {groups.map((group, index) => (
         <div key={group.heading ?? index}>
           {group.heading ? (
-            <h2 className="mb-4 flex items-center gap-3 font-display text-[10px] font-extrabold uppercase tracking-[0.22em] text-signal">
+            <h2 className="mb-4 flex items-center gap-3 font-display text-[10px] font-extrabold uppercase tracking-[0.22em] text-signal-bright">
               <span className="h-0.5 w-5 bg-signal" aria-hidden="true" />
               {group.heading}
             </h2>
@@ -106,7 +106,7 @@ export function AppShell({
                       <span
                         className={cn(
                           "px-2 py-1 text-[10px] font-extrabold tabular-nums",
-                          active ? "bg-signal text-ink" : "bg-white/15 text-white",
+                          active ? "bg-signal text-paper" : "bg-white/15 text-white",
                         )}
                       >
                         {item.badge}
@@ -125,7 +125,7 @@ export function AppShell({
           <Link
             href={crossLink.href}
             onClick={() => setMobileOpen(false)}
-            className="flex min-h-[48px] items-center gap-3 px-4 font-display text-[13px] font-bold uppercase tracking-[0.08em] text-signal transition-colors hover:bg-white/5"
+            className="flex min-h-[48px] items-center gap-3 px-4 font-display text-[13px] font-bold uppercase tracking-[0.08em] text-signal-bright transition-colors hover:bg-white/5"
           >
             <span aria-hidden="true">⇄</span>
             {crossLink.label}
@@ -223,7 +223,7 @@ function SidebarHeader({ area, bare = false }: { area: "portal" | "admin"; bare?
         <span className="block truncate font-display text-[13px] font-extrabold uppercase tracking-[0.12em] text-white">
           TJ Policy Debate
         </span>
-        <span className="mt-1 block font-display text-[10px] font-bold uppercase tracking-[0.2em] text-signal">
+        <span className="mt-1 block font-display text-[10px] font-bold uppercase tracking-[0.2em] text-signal-bright">
           {area === "admin" ? "Officer dashboard" : "Team portal"}
         </span>
       </span>

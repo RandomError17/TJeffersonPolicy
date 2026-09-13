@@ -66,14 +66,14 @@ export default async function HomePage() {
             <span className="flex h-16 w-16 shrink-0 items-center justify-center border-2 border-signal bg-navy-900">
               <Image src="/brand/logo.svg" alt="" width={40} height={40} className="h-10 w-10" />
             </span>
-            <p className="max-w-[24ch] font-display text-[11px] font-bold uppercase leading-relaxed tracking-[0.2em] text-signal sm:max-w-none">
+            <p className="max-w-[24ch] font-display text-[11px] font-bold uppercase leading-relaxed tracking-[0.2em] text-signal-bright sm:max-w-none">
               {CLUB.school}
             </p>
           </div>
 
           <h1 className="mt-12 text-white">
             <span className="t-display block">Jefferson</span>
-            <span className="t-display block text-signal">Policy</span>
+            <span className="t-display block text-signal-bright">Policy</span>
             <span className="t-display block">Debate</span>
           </h1>
 
@@ -172,7 +172,7 @@ export default async function HomePage() {
                         </span>
 
                         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                          <span className="border-2 border-ink bg-signal px-2.5 py-1 font-display text-[10px] font-bold uppercase tracking-[0.14em] text-ink">
+                          <span className="border-2 border-ink bg-signal px-2.5 py-1 font-display text-[10px] font-bold uppercase tracking-[0.14em] text-paper">
                             {labelFor(ACHIEVEMENT_LEVELS, achievement.level)}
                           </span>
                           <span className="font-display text-[11px] font-bold uppercase tracking-[0.16em] text-ink/50">
@@ -291,7 +291,7 @@ export default async function HomePage() {
             {SEASON_PHASES.map((phase, index) => (
               <li key={phase.window} className="bg-navy-900">
                 <Reveal delay={index * 80} className="h-full p-9">
-                  <span className="font-display text-5xl font-extrabold leading-none tracking-tight text-signal">
+                  <span className="font-display text-5xl font-extrabold leading-none tracking-tight text-signal-bright">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <p className="mt-7 font-display text-lg font-bold uppercase leading-tight tracking-tight text-white">
@@ -351,10 +351,10 @@ export default async function HomePage() {
           to join" is the same call to action, and showing both at once is
           redundant, not reinforcing. */}
       <section data-hides-sticky-join-bar className="relative overflow-hidden bg-signal">
-        <div className="c-grid-texture-dark absolute inset-0" aria-hidden="true" />
+        <div className="c-grid-texture absolute inset-0" aria-hidden="true" />
         <div className="u-container relative py-28 text-center md:py-36">
-          <h2 className="t-h2 mx-auto max-w-3xl text-ink">Ready to start debating?</h2>
-          <p className="mx-auto mt-10 max-w-xl text-lg leading-relaxed text-ink/75">
+          <h2 className="t-h2 mx-auto max-w-3xl text-paper">Ready to start debating?</h2>
+          <p className="mx-auto mt-10 max-w-xl text-lg leading-relaxed text-paper/80">
             Whether you have competed for years or have never given a speech, there is a place for you on TJ Policy.
             Novices are welcome all year.
           </p>
@@ -362,7 +362,7 @@ export default async function HomePage() {
             <ButtonLink href="/join" size="lg" variant="solid">
               How to join
             </ButtonLink>
-            <ButtonLink href="/contact" size="lg" variant="outline">
+            <ButtonLink href="/contact" size="lg" variant="onDark">
               Ask a question
             </ButtonLink>
           </div>

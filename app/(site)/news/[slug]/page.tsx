@@ -74,7 +74,7 @@ export default async function NewsPostPage({ params }: PageProps) {
           <div className="max-w-4xl">
             <Link
               href="/news"
-              className="inline-block border-b-2 border-signal pb-1 font-display text-xs font-bold uppercase tracking-[0.16em] text-signal hover:bg-signal hover:text-ink"
+              className="inline-block border-b-2 border-signal pb-1 font-display text-xs font-bold uppercase tracking-[0.16em] text-signal-bright hover:bg-signal hover:text-paper"
             >
               ← All news
             </Link>

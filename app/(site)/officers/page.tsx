@@ -52,7 +52,7 @@ export default async function OfficersPage() {
                   </p>
                   <a
                     href={`mailto:${officer.email}`}
-                    className="mt-auto pt-8 text-sm text-ink/70 underline decoration-signal decoration-2 underline-offset-4 transition-colors hover:bg-signal hover:text-ink"
+                    className="mt-auto pt-8 text-sm text-ink/70 underline decoration-signal decoration-2 underline-offset-4 transition-colors hover:bg-signal hover:text-paper"
                   >
                     {officer.email}
                   </a>
@@ -93,7 +93,7 @@ export default async function OfficersPage() {
                     {officer.publicEmail ? (
                       <a
                         href={`mailto:${officer.publicEmail}`}
-                        className="mt-auto pt-8 text-sm text-ink/70 underline decoration-signal decoration-2 underline-offset-4 transition-colors hover:bg-signal hover:text-ink"
+                        className="mt-auto pt-8 text-sm text-ink/70 underline decoration-signal decoration-2 underline-offset-4 transition-colors hover:bg-signal hover:text-paper"
                       >
                         {officer.publicEmail}
                       </a>
@@ -115,7 +115,7 @@ export default async function OfficersPage() {
               Anything addressed to{" "}
               <a
                 href={`mailto:${settings["club.email"]}`}
-                className="border-b-2 border-signal font-semibold text-white hover:bg-signal hover:text-ink"
+                className="border-b-2 border-signal font-semibold text-white hover:bg-signal hover:text-paper"
               >
                 {settings["club.email"]}
               </a>{" "}
