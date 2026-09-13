@@ -21,7 +21,7 @@ export const contentType = "image/png";
  */
 export default function OpengraphImage() {
   const navy = "#0d1735";
-  const signal = "#c4271b";
+  const signal = "#9e1b12";
   const signalBright = "#ff6b52";
   const paper = "#f1eee4";
 
