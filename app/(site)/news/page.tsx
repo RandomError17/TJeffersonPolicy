@@ -28,7 +28,7 @@ export default async function NewsIndexPage() {
         eyebrow="News"
         title="Announcements & results"
         description="Tournament results, recruitment notices, deadlines, and team updates, written by the officer team."
-        index="03"
+        index="04"
       />
 
       <Section tone="raised">

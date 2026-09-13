@@ -68,8 +68,9 @@ export default async function NewsPostPage({ params }: PageProps) {
       <section className="on-dark relative overflow-hidden bg-navy-900">
         <div className="c-grid-texture absolute inset-0" aria-hidden="true" />
         <div className="c-diagonal -right-24 top-[-30%] h-[180%] w-6 opacity-90" aria-hidden="true" />
+        <div className="c-diagonal -right-2 top-[-30%] h-[180%] w-2 opacity-60" aria-hidden="true" />
 
-        <div className="u-container relative pb-24 pt-[calc(var(--header-height)+72px)] md:pb-28 md:pt-[calc(var(--header-height)+96px)]">
+        <div className="u-container relative pb-24 pt-[calc(var(--header-height)+80px)] md:pb-32 md:pt-[calc(var(--header-height)+120px)]">
           <div className="max-w-4xl">
             <Link
               href="/news"

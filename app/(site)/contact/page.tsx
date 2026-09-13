@@ -64,7 +64,7 @@ export default async function ContactPage() {
         eyebrow="Contact"
         title="Get in touch"
         description="Questions about joining, tournament logistics, or the program in general — start with whichever of these fits."
-        index="04"
+        index="05"
       />
 
       <Section tone="raised">

@@ -41,6 +41,7 @@ export default async function AchievementsPage() {
         eyebrow="The record"
         title="Results, season by season"
         description="Every entry on this page is recorded by the officer team from an actual tournament result."
+        index="03"
       >
         {rows.length > 0 ? (
           <dl className="grid max-w-4xl grid-cols-2 gap-px border-2 border-white/25 bg-white/25 sm:grid-cols-4">
