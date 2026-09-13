@@ -7,11 +7,16 @@ import { DEBATE_EVENTS, labelFor, seasonLabel } from "@/lib/constants";
 import { OFFICER_ROSTER_2025 } from "@/lib/content/club";
 import { listPublicOfficers, officerEvents } from "@/lib/services/officers";
 import { getSettings } from "@/lib/services/settings";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Officer team",
-  description: "The elected officer team leading TJ Policy Debate — captains, teaching coordinators, and staff roles.",
-};
+  description:
+    "The elected officer team leading TJ Policy Debate — captains, teaching coordinators, and staff roles.",
+  path: "/officers",
+});
 
 /**
  * The roster is database-driven. Until officers create their profiles in the
@@ -25,6 +30,8 @@ export default async function OfficersPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Officer team", path: "/officers" }])} />
+
       <PageHero
         eyebrow={usingFallback ? "Officer team" : `Officer team · ${seasonLabel(termYear)}`}
         title="The people running the team"

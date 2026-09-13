@@ -4,12 +4,16 @@ import { PageHero, Section, SectionHeading } from "@/components/site/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { CLUB, EXTERNAL_LINKS, MEETINGS, SEASON_PHASES } from "@/lib/content/club";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
     "Policy Debate at Thomas Jefferson High School for Science and Technology — how the program is organised, how meetings run, and what a season looks like.",
-};
+  path: "/about",
+});
 
 const VALUES = [
   {
@@ -29,6 +33,8 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "About", path: "/about" }])} />
+
       <PageHero
         eyebrow="About the program"
         title="A research program that happens to be a debate team"

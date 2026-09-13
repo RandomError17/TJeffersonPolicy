@@ -112,10 +112,22 @@ export async function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col gap-4 border-t-2 border-white/15 pt-10 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-20 flex flex-col gap-6 border-t-2 border-white/15 pt-10 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-display text-xs font-bold uppercase tracking-[0.16em]">
             © {new Date().getFullYear()} TJHSST Policy Debate
           </p>
+          <ul className="flex flex-wrap items-center gap-x-7 gap-y-3 font-display text-xs font-bold uppercase tracking-[0.16em]">
+            <li>
+              <Link href="/privacy" className="transition-colors hover:text-signal">
+                Privacy
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms" className="transition-colors hover:text-signal">
+                Terms
+              </Link>
+            </li>
+          </ul>
           <p>
             Built by {CLUB.siteCredit}. Sign in with{" "}
             <a

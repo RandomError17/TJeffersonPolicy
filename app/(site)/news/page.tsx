@@ -5,11 +5,16 @@ import { Reveal } from "@/components/ui/Reveal";
 import { EmptyState } from "@/components/ui/States";
 import { listPublishedNews, postTags } from "@/lib/services/news";
 import { formatDate } from "@/lib/utils/format";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "News",
-  description: "Announcements, tournament results, and deadlines from the TJ Policy Debate officer team.",
-};
+  description:
+    "Announcements, tournament results, and deadlines from the TJ Policy Debate officer team.",
+  path: "/news",
+});
 
 export default async function NewsIndexPage() {
   const posts = await listPublishedNews();
@@ -17,6 +22,8 @@ export default async function NewsIndexPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "News", path: "/news" }])} />
+
       <PageHero
         eyebrow="News"
         title="Announcements & results"

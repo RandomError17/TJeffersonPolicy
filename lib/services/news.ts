@@ -16,6 +16,9 @@ const publicSelect = {
   imageUrl: true,
   tags: true,
   publishedAt: true,
+  // Surfaced as `dateModified` in the article's structured data, so a post
+  // corrected after publication is not presented as untouched since.
+  updatedAt: true,
   author: { select: { displayName: true, officer: { select: { position: true } } } },
 } as const;
 

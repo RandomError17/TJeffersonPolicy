@@ -2,14 +2,18 @@ import type { Metadata } from "next";
 import { PageHero, Section, SectionHeading } from "@/components/site/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { JOIN_STEPS, MEETINGS, POLICY_EXPLAINER } from "@/lib/content/club";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { getSettings } from "@/lib/services/settings";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Join the team",
   description:
     "How to join TJ Policy Debate — what Policy Debate is, what the commitment looks like, and the five steps to your first tournament.",
-};
+  path: "/join",
+});
 
 const FAQ = [
   {
@@ -46,6 +50,11 @@ export default async function JoinPage() {
 
   return (
     <>
+      {/* The FAQ block below is the same list rendered further down the page —
+          structured data that disagreed with the visible page would be treated
+          as spam, so both read from the one FAQ constant. */}
+      <JsonLd data={[breadcrumbSchema([{ name: "Join the team", path: "/join" }]), faqSchema(FAQ)]} />
+
       <PageHero
         eyebrow="Join the team"
         title="Start here"
