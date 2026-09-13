@@ -1,0 +1,37 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "tjpolicy",
+	"vars": {
+		"APP_URL": "https://tjpolicy.org",
+		"AUTH_PROVIDER": "ion",
+		"ION_BASE_URL": "https://ion.tjhsst.edu",
+		"ION_CLIENT_ID": "hz1tVs84PpMXIPnT6WcAM3Riyn8Aw6gA3Sd8cCuS",
+		"ION_USE_PKCE": "true",
+		"MYSCHOOLBUCKS_URL": "https://www.myschoolbucks.com/",
+		"OFFICER_USERNAMES": "2028rreddy,2028achapuri,2028pchivuku,2028ssankar,2028ssurapan,2028sseth",
+		"TABROOM_IMPORT_ENABLED": "true"
+	},
+	"compatibility_date": "2026-09-11",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"services": [
+		{
+			// Self-reference service binding, the service name must match the worker name
+			// see https://opennext.js.org/cloudflare/caching
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "tjpolicy"
+		}
+	],
+	"images": {
+		// Enable image optimization
+		// see https://opennext.js.org/cloudflare/howtos/image
+		"binding": "IMAGES"
+	}
+}
