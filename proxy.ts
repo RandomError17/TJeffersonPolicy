@@ -21,7 +21,23 @@ export default function proxy(request: NextRequest) {
   const isProduction = process.env.NODE_ENV === "production";
   const nonce = isProduction ? Buffer.from(crypto.randomUUID()).toString("base64") : null;
 
-  const scriptSrc = nonce ? `'self' 'nonce-${nonce}' 'strict-dynamic'` : "'self' 'unsafe-inline' 'unsafe-eval'";
+  /**
+   * Analytics origin, when one is configured. Plausible is cookieless, so it
+   * needs no consent gate — but it does need two CSP allowances: the script
+   * itself, and the endpoint it POSTs events to.
+   *
+   * Under 'strict-dynamic' a modern browser ignores host allowlists entirely
+   * and admits only the nonce-carrying tag that components/analytics renders.
+   * The host is still listed because browsers that predate 'strict-dynamic'
+   * fall back to the allowlist, and without it analytics would silently fail
+   * there.
+   */
+  const analyticsOrigin = analyticsOriginFrom(process.env.NEXT_PUBLIC_PLAUSIBLE_SRC);
+  const analyticsSrc = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ? ` ${analyticsOrigin}` : "";
+
+  const scriptSrc = nonce
+    ? `'self'${analyticsSrc} 'nonce-${nonce}' 'strict-dynamic'`
+    : `'self'${analyticsSrc} 'unsafe-inline' 'unsafe-eval'`;
 
   const csp = [
     "default-src 'self'",
@@ -30,7 +46,7 @@ export default function proxy(request: NextRequest) {
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: https:",
     "font-src 'self' data:",
-    `connect-src 'self'${isProduction ? "" : " ws: http://localhost:*"}`,
+    `connect-src 'self'${analyticsSrc}${isProduction ? "" : " ws: http://localhost:*"}`,
     "frame-ancestors 'none'",
     "frame-src 'self'",
     "form-action 'self' https://ion.tjhsst.edu",
@@ -63,6 +79,24 @@ export default function proxy(request: NextRequest) {
   }
 
   return response;
+}
+
+/**
+ * Origin of the analytics script, for the CSP allowlist.
+ *
+ * Self-hosted Plausible and Umami serve the same script from their own domain,
+ * so the origin is derived from the configured URL rather than hard-coded. A
+ * malformed value falls back to the hosted origin instead of throwing — a bad
+ * environment variable must not take every request down.
+ */
+function analyticsOriginFrom(src: string | undefined): string {
+  const fallback = "https://plausible.io";
+  if (!src) return fallback;
+  try {
+    return new URL(src).origin;
+  } catch {
+    return fallback;
+  }
 }
 
 export const config = {

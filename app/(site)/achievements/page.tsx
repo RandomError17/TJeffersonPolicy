@@ -4,13 +4,17 @@ import { ButtonLink } from "@/components/ui/Button";
 import { CountUp } from "@/components/ui/CountUp";
 import { EmptyState } from "@/components/ui/States";
 import { achievementParticipants, achievementStats, listAchievements } from "@/lib/services/achievements";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 import { AchievementTimeline, type AchievementView } from "./AchievementTimeline";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Achievements",
   description:
     "Tournament results, state and national qualifications, and individual awards earned by TJ Policy Debate.",
-};
+  path: "/achievements",
+});
 
 export default async function AchievementsPage() {
   const rows = await listAchievements();
@@ -31,6 +35,8 @@ export default async function AchievementsPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Achievements", path: "/achievements" }])} />
+
       <PageHero
         eyebrow="The record"
         title="Results, season by season"

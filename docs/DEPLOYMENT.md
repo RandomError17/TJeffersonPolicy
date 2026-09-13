@@ -18,6 +18,8 @@ background workers, no queue, and no object storage.
 | `OFFICER_USERNAMES`           | recommended         | Comma-separated Ion usernames that always hold the officer role. Re-applied on every sign-in. |
 | `MYSCHOOLBUCKS_URL`           | no                  | Initial default only; officers edit it in the dashboard afterwards.   |
 | `TABROOM_IMPORT_ENABLED`      | no                  | `false` switches off the read-only Tabroom lookup.                    |
+| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`| no                  | Domain as registered in Plausible, e.g. `tjpolicy.org`. Unset ⇒ no analytics script is loaded at all, which keeps local and preview traffic out of the numbers. |
+| `NEXT_PUBLIC_PLAUSIBLE_SRC`   | no                  | Only for a self-hosted Plausible/Umami. Its origin is added to the CSP automatically by `proxy.ts`. |
 
 `lib/env.ts` validates all of these at startup and fails with a specific
 message, so a misconfigured deploy stops immediately instead of half-working.
@@ -25,7 +27,19 @@ The production-only assertions are skipped during `next build` — building is n
 serving, and a developer compiling locally has no reason to hold the production
 Ion secrets.
 
+## Cost controls
+
+Vercel and Neon both bill by usage, so a spend cap has to be set by hand in
+those dashboards — no setting in this repository can do it. See
+[COSTS.md](./COSTS.md).
+
 ## Choosing a database
+
+> **Note — this section is out of date.** `prisma/schema.prisma` now declares
+> `provider = "postgresql"` and the live deployment runs on Neon Postgres. The
+> alternatives below described the original SQLite setup and are kept only as
+> background on why the schema was written to be portable. Read them as history,
+> not as instructions.
 
 The schema is deliberately portable. Pick whichever fits the hosting:
 

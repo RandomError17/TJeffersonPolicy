@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Section } from "@/components/site/PageHero";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { ButtonLink } from "@/components/ui/Button";
+import { breadcrumbSchema, newsArticleSchema } from "@/lib/schema";
+import { pageMetadata, privateMetadata } from "@/lib/seo";
 import { getPublishedPost, listPublishedNews, postTags } from "@/lib/services/news";
 import { formatDate } from "@/lib/utils/format";
 import { markdownToText, renderMarkdown } from "@/lib/utils/markdown";
@@ -14,13 +17,23 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPublishedPost(slug);
-  if (!post) return { title: "Post not found" };
 
-  return {
+  // An unknown slug renders the 404 below; keeping it out of the index means a
+  // mistyped link cannot become a crawlable dead page.
+  if (!post) return privateMetadata("Post not found");
+
+  // A description is required for the social card, so fall back to the opening
+  // of the body when an editor left the excerpt empty. Trimmed to roughly the
+  // length search engines actually display.
+  const description = post.excerpt || markdownToText(post.body).slice(0, 200).trimEnd();
+
+  return pageMetadata({
     title: post.title,
-    description: post.excerpt || markdownToText(post.body),
-    openGraph: { title: post.title, description: post.excerpt, type: "article" },
-  };
+    description,
+    path: `/news/${post.slug}`,
+    type: "article",
+    publishedTime: post.publishedAt,
+  });
 }
 
 export default async function NewsPostPage({ params }: PageProps) {
@@ -35,6 +48,23 @@ export default async function NewsPostPage({ params }: PageProps) {
 
   return (
     <>
+      <JsonLd
+        data={[
+          newsArticleSchema({
+            title: post.title,
+            slug: post.slug,
+            excerpt: post.excerpt,
+            publishedAt: post.publishedAt,
+            updatedAt: post.updatedAt,
+            authorName: post.author?.displayName ?? null,
+          }),
+          breadcrumbSchema([
+            { name: "News", path: "/news" },
+            { name: post.title, path: `/news/${post.slug}` },
+          ]),
+        ]}
+      />
+
       <section className="on-dark relative overflow-hidden bg-navy-900">
         <div className="c-grid-texture absolute inset-0" aria-hidden="true" />
         <div className="c-diagonal -right-24 top-[-30%] h-[180%] w-6 opacity-90" aria-hidden="true" />

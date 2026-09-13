@@ -1,16 +1,28 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/Button";
 import { CountUp } from "@/components/ui/CountUp";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section, SectionHeading } from "@/components/site/PageHero";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { EmptyState } from "@/components/ui/States";
 import { CLUB, MEETINGS, POLICY_EXPLAINER, SEASON_PHASES } from "@/lib/content/club";
 import { ACHIEVEMENT_LEVELS, labelFor } from "@/lib/constants";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { achievementParticipants, listFeaturedAchievements } from "@/lib/services/achievements";
 import { listPublishedNews } from "@/lib/services/news";
 import { getSettings } from "@/lib/services/settings";
 import { formatDate } from "@/lib/utils/format";
+
+/**
+ * The root layout already supplies the site-wide title, description, and
+ * social tags; the home page only needs to claim `/` as its canonical so a
+ * visit with a tracking query string does not read as a separate document.
+ */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default async function HomePage() {
   const [featured, news, settings] = await Promise.all([
@@ -21,6 +33,10 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* Organization and WebSite, emitted once on the home page. Subpages
+          reference these by @id rather than repeating them. */}
+      <JsonLd data={[organizationSchema(), websiteSchema()]} />
+
       {/* ================================================================ Hero
           A flat navy field with the team photograph knocked back to a duotone
           plate, crossed by hard signal bars. The headline is set as three

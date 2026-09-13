@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Inter } from "next/font/google";
+import { Analytics } from "@/components/analytics/Analytics";
 import { CLUB } from "@/lib/content/club";
+import { siteOrigin } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,20 +23,37 @@ const archivo = Archivo({
   weight: ["600", "700", "800"],
 });
 
+const SITE_DESCRIPTION =
+  "Policy Debate at Thomas Jefferson High School for Science and Technology. Varsity and novice squads competing on the local, state, and national circuits.";
+
 export const metadata: Metadata = {
+  /**
+   * Makes every relative `alternates.canonical` and `openGraph.url` in the
+   * app resolve to an absolute URL. Without it Next emits relative canonical
+   * tags, which crawlers treat inconsistently.
+   */
+  metadataBase: new URL(siteOrigin()),
   title: {
     default: `${CLUB.shortName} — ${CLUB.school}`,
     template: `%s · ${CLUB.shortName}`,
   },
-  description:
-    "Policy Debate at Thomas Jefferson High School for Science and Technology. Varsity and novice squads competing on the local, state, and national circuits.",
+  description: SITE_DESCRIPTION,
   applicationName: CLUB.shortName,
-  icons: { icon: "/brand/logo.svg", apple: "/brand/logo.png" },
+  alternates: { canonical: "/" },
+  // Icons come from the app/icon.svg, app/apple-icon.tsx and app/favicon.ico
+  // file conventions; declaring them here as well would emit duplicate tags.
   openGraph: {
     title: `${CLUB.shortName} — ${CLUB.school}`,
-    description:
-      "Policy Debate at Thomas Jefferson High School for Science and Technology. Varsity and novice squads competing on the local, state, and national circuits.",
+    description: SITE_DESCRIPTION,
+    siteName: CLUB.shortName,
+    locale: "en_US",
     type: "website",
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${CLUB.shortName} — ${CLUB.school}`,
+    description: SITE_DESCRIPTION,
   },
   robots: {
     index: true,
@@ -70,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         {children}
+        <Analytics />
       </body>
     </html>
   );

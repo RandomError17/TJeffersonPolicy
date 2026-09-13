@@ -6,11 +6,16 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { CLUB, EXTERNAL_LINKS, SOCIALS } from "@/lib/content/club";
 import { getSettings } from "@/lib/services/settings";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
-  description: "How to reach TJ Policy Debate — email, Instagram, the members' Facebook group, and Discord.",
-};
+  description:
+    "How to reach TJ Policy Debate — email, Instagram, the members' Facebook group, and Discord.",
+  path: "/contact",
+});
 
 export default async function ContactPage() {
   const settings = await getSettings();
@@ -53,6 +58,8 @@ export default async function ContactPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema([{ name: "Contact", path: "/contact" }])} />
+
       <PageHero
         eyebrow="Contact"
         title="Get in touch"

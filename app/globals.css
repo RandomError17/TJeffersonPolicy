@@ -440,6 +440,94 @@
 }
 
 /* ==========================================================================
+   Legal documents — privacy and terms
+   ========================================================================== */
+
+@layer components {
+  .legal {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-ink);
+  }
+
+  .legal p,
+  .legal ul,
+  .legal ol {
+    color: color-mix(in srgb, var(--color-ink) 78%, transparent);
+  }
+
+  .legal p + p,
+  .legal ul,
+  .legal ol {
+    margin-top: 1.1em;
+  }
+
+  .legal ul {
+    list-style: square;
+    padding-left: 1.4em;
+  }
+
+  .legal li + li {
+    margin-top: 0.7em;
+  }
+
+  .legal li::marker {
+    color: var(--color-signal-deep);
+  }
+
+  .legal strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  /* A clause boundary should be visible while scanning, not just felt. */
+  .legal .legal-section + .legal-section h2 {
+    border-top: var(--rule) solid var(--color-rule-faint);
+    padding-top: 3rem;
+  }
+
+  .legal code {
+    background: var(--color-paper-sunk);
+    border: var(--rule-hair) solid var(--color-rule-faint);
+    padding: 0.1em 0.4em;
+    font-size: 0.9em;
+  }
+
+  .legal-link {
+    color: var(--color-navy-600);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .legal-link:hover {
+    background: var(--color-signal);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  /* The scope caveat: set apart so it is not mistaken for a clause. */
+  .legal .legal-note {
+    border-left: var(--rule-heavy) solid var(--color-signal);
+    background: var(--color-paper-sunk);
+    padding: 1.25rem 1.5rem;
+    font-size: 0.9375rem;
+  }
+
+  .legal .legal-footer {
+    margin-top: 4rem;
+    border-top: var(--rule) solid var(--color-rule);
+    padding-top: 2rem;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+}
+
+/* ==========================================================================
    Rendered news bodies — scoped so markdown output cannot restyle the app
    ========================================================================== */
 
