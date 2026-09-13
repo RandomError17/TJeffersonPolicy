@@ -18,15 +18,15 @@ export const metadata: Metadata = pageMetadata({
 const VALUES = [
   {
     title: "Research first",
-    body: "Every argument is grounded in evidence cut from journals, government reporting, and the trade press. Debaters build files they can defend under cross-examination.",
+    body: "Every argument is supported by evidence cut from journals, government reporting, and the trade press. Debaters build files they can defend under cross-examination.",
   },
   {
     title: "Student-led",
-    body: "Captains and teaching coordinators run practice, write the novice curriculum, and coach rounds. The officer team is elected from within the squad.",
+    body: "Captains and teaching coordinators run practices, write the novice lesson plans, and coach rounds. The officer team is elected at the end of every season.",
   },
   {
     title: "Open to beginners",
-    body: "The novice squad assumes no experience. Fundamentals, drills, and lectures run all year, and novices compete at their own level from the first tournament.",
+    body: "Policy debate is open to all TJ students no matter what skill level you may be at. Fundamentals, drills, and lectures run all year, and novices compete at their own level from the first tournament.",
   },
 ] as const;
 
@@ -37,8 +37,8 @@ export default function AboutPage() {
 
       <PageHero
         eyebrow="About the program"
-        title="A research program that happens to be a debate team"
-        description="Policy Debate has been part of extracurricular life at Thomas Jefferson for decades. Today the team fields varsity and novice squads across the local, state, and national circuits."
+        title="What is TJ Policy Debate?"
+        description="Policy Debate has been part of extracurricular life at Thomas Jefferson for decades. Today the team competes across the local, state, and national circuits."
         index="01"
       />
 
@@ -48,19 +48,18 @@ export default function AboutPage() {
             <SectionHeading eyebrow="The program" title="How the team works" />
             <div className="mt-10 space-y-6 border-l-4 border-navy-600 pl-8">
               <p className="t-body-lg t-muted">
-                Policy is a two-person event. Partners debate a single national resolution for the entire school year,
+                Policy is a two person event. Partners debate a single national resolution for the entire school year,
                 arguing the affirmative in some rounds and the negative in others, which means every debater has to
                 understand the topic from both directions.
               </p>
               <p className="t-body t-muted">
-                Preparation happens in two places: weekly eighth-period meetings, where the squad drills speeches and
-                runs practice rounds, and independent research, where partnerships build and update their own files
+                Preparation happens during our weekly eighth period meetings during Friday 8A and Wednesday 8B, where we conduct drills, speeches,
+                practice rounds, and independent research. This is time where partners build and update their own files
                 between tournaments.
               </p>
               <p className="t-body t-muted">
                 Officers coordinate tournament entries, run the novice curriculum, and manage the team&rsquo;s finances
-                and logistics. Competing is a real commitment — most tournaments run a full Saturday, and some run two
-                days.
+                and logistics.
               </p>
             </div>
             <div className="mt-12 flex flex-wrap gap-4">
@@ -83,16 +82,13 @@ export default function AboutPage() {
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="h-auto w-full"
               />
-              <figcaption className="border-t-2 border-rule bg-navy-800 px-6 py-5 text-sm leading-relaxed text-white/70">
-                The squad after a tournament. Photograph from the team&rsquo;s own archive.
-              </figcaption>
             </figure>
           </Reveal>
         </div>
       </Section>
 
       <Section tone="paper">
-        <SectionHeading eyebrow="What we care about" title="Three things that define the squad" />
+        <SectionHeading eyebrow="What we care about" title="Our Values" />
         {/* Cells sit on a navy bed showing through 1px gaps, so the reveal has
             to animate the contents — fading the cell itself would expose the
             bed underneath it. */}
@@ -139,7 +135,7 @@ export default function AboutPage() {
           </div>
 
           <div className="col-span-12 lg:col-span-6">
-            <SectionHeading eyebrow="Calendar" title="The shape of a season" />
+            <SectionHeading eyebrow="Calendar" title="Season Schedule" />
             <ol className="mt-12 border-l-4 border-navy-600 pl-8">
               {SEASON_PHASES.map((phase, index) => (
                 <li key={phase.window} className="relative pb-10 last:pb-0">
