@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSyncExternalStore } from "react";
+import { forwardRef, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "tjpd_cookie_notice_ack";
 /** Fired on dismissal so this tab updates; `storage` only fires in other tabs. */
@@ -24,18 +24,64 @@ const CTA_HIDDEN_ON = ["/join", "/contact", "/signin"];
  * they are read through `useSyncExternalStore`. That is what it is for, and it
  * gives us the server/client split for free: the server snapshots below render
  * nothing, so the markup React hydrates always matches what the server sent.
+ *
+ * Whichever bar is fixed on screen also owns the in-flow spacer beneath the
+ * footer that keeps the last row of footer links from sitting under it. The
+ * spacer's height is measured off the real bar via `ResizeObserver` rather
+ * than hardcoded, because the cookie notice's height is not fixed — its
+ * privacy sentence wraps to a different number of lines depending on viewport
+ * width, so a constant reserved height (sized for the join bar) could leave
+ * the notice covering footer content on first visit.
+ *
+ * The join bar also defers to any in-page section that is itself the same
+ * call to action — see `[data-hides-sticky-join-bar]` below — so a page that
+ * ends on its own "join" CTA does not show a second, floating one over it.
+ * That visibility is read the same way as scroll position: synchronously
+ * from the DOM, driven by the same scroll/resize subscription, rather than a
+ * separate IntersectionObserver — one less thing to keep in sync on
+ * navigation, since a fresh render (pathname changed) re-runs the snapshot
+ * against whatever is actually in the DOM now.
  */
 export function BottomBars() {
   const pathname = usePathname();
   const acknowledged = useSyncExternalStore(subscribeToAck, getAckSnapshot, getAckServerSnapshot);
   const scrolledPastHero = useSyncExternalStore(subscribeToScroll, getScrollSnapshot, getScrollServerSnapshot);
+  const ctaSectionVisible = useSyncExternalStore(subscribeToScroll, getCtaSectionSnapshot, getCtaSectionServerSnapshot);
+  const barRef = useRef<HTMLDivElement>(null);
+  // The join bar's own footprint (60px min-height + 4px top border) is a safe
+  // default for the first paint, before ResizeObserver has measured anything.
+  const [barHeight, setBarHeight] = useState(64);
 
-  if (!acknowledged) return <CookieNotice />;
+  useLayoutEffect(() => {
+    const node = barRef.current;
+    if (!node || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(([entry]) => setBarHeight(entry.target.getBoundingClientRect().height));
+    observer.observe(node);
+    return () => observer.disconnect();
+  });
+
+  if (!acknowledged) {
+    return (
+      <>
+        <Spacer height={barHeight} />
+        <CookieNotice ref={barRef} />
+      </>
+    );
+  }
 
   const ctaHidden = CTA_HIDDEN_ON.some((route) => pathname === route || pathname.startsWith(`${route}/`));
   if (ctaHidden) return null;
 
-  return <StickyJoinBar shown={scrolledPastHero} />;
+  return (
+    <>
+      <Spacer height={barHeight} />
+      <StickyJoinBar ref={barRef} shown={scrolledPastHero && !ctaSectionVisible} />
+    </>
+  );
+}
+
+function Spacer({ height }: { height: number }) {
+  return <div className="lg:hidden print:hidden" style={{ height }} aria-hidden="true" />;
 }
 
 /* --------------------------------------------------------------- the stores */
@@ -92,6 +138,18 @@ function getScrollServerSnapshot(): boolean {
   return false;
 }
 
+/** Whether the page's own final-CTA section (if it has one) is on screen. */
+function getCtaSectionSnapshot(): boolean {
+  const ctaSection = document.querySelector<HTMLElement>("[data-hides-sticky-join-bar]");
+  if (!ctaSection) return false;
+  const rect = ctaSection.getBoundingClientRect();
+  return rect.top < window.innerHeight && rect.bottom > 0;
+}
+
+function getCtaSectionServerSnapshot(): boolean {
+  return false;
+}
+
 /* --------------------------------------------------------------- the bars */
 
 /**
@@ -109,9 +167,10 @@ function getScrollServerSnapshot(): boolean {
  * If a tracking or advertising cookie is ever added, this must become a real
  * gate that withholds the script until the visitor opts in.
  */
-function CookieNotice() {
+const CookieNotice = forwardRef<HTMLDivElement>(function CookieNotice(_props, ref) {
   return (
     <div
+      ref={ref}
       role="region"
       aria-label="Cookie notice"
       className="fixed inset-x-0 bottom-0 z-[70] border-t-4 border-signal bg-navy-900 print:hidden"
@@ -138,16 +197,17 @@ function CookieNotice() {
       </div>
     </div>
   );
-}
+});
 
 /**
  * Persistent join bar on small screens. It slides in only once the hero has
  * scrolled away, so it never covers the hero's own primary CTA with a
  * duplicate of itself.
  */
-function StickyJoinBar({ shown }: { shown: boolean }) {
+const StickyJoinBar = forwardRef<HTMLDivElement, { shown: boolean }>(function StickyJoinBar({ shown }, ref) {
   return (
     <div
+      ref={ref}
       className={[
         "fixed inset-x-0 bottom-0 z-[60] border-t-4 border-ink bg-signal lg:hidden print:hidden",
         "transition-transform duration-200 [transition-timing-function:var(--ease-out-soft)] motion-reduce:transition-none",
@@ -167,4 +227,4 @@ function StickyJoinBar({ shown }: { shown: boolean }) {
       </Link>
     </div>
   );
-}
+});

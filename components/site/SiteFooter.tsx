@@ -112,7 +112,7 @@ export async function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col gap-6 border-t-2 border-white/15 pt-10 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-20 flex flex-col gap-6 border-t-2 border-white/15 pt-10 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-display text-xs font-bold uppercase tracking-[0.16em]">
             © {new Date().getFullYear()} TJHSST Policy Debate
           </p>

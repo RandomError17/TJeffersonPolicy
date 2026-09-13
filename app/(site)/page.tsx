@@ -59,27 +59,26 @@ export default async function HomePage() {
         <div className="c-diagonal right-[2%] top-[-40%] h-[190%] w-1.5 opacity-50" aria-hidden="true" />
 
         <div className="u-container relative pb-24 pt-[calc(var(--header-height)+96px)] md:pb-32">
-          <Reveal>
-            <div className="flex items-center gap-5">
-              <span className="flex h-16 w-16 shrink-0 items-center justify-center border-2 border-signal bg-navy-900">
-                <Image src="/brand/logo.svg" alt="" width={40} height={40} className="h-10 w-10" />
-              </span>
-              <p className="max-w-[24ch] font-display text-[11px] font-bold uppercase leading-relaxed tracking-[0.2em] text-signal sm:max-w-none">
-                {CLUB.school}
-              </p>
-            </div>
-          </Reveal>
+          {/* Above-the-fold: rendered plain, not wrapped in Reveal — this has to
+              be visible the instant the page paints, not after JS hydrates and
+              an IntersectionObserver fires. */}
+          <div className="flex items-center gap-5">
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center border-2 border-signal bg-navy-900">
+              <Image src="/brand/logo.svg" alt="" width={40} height={40} className="h-10 w-10" />
+            </span>
+            <p className="max-w-[24ch] font-display text-[11px] font-bold uppercase leading-relaxed tracking-[0.2em] text-signal sm:max-w-none">
+              {CLUB.school}
+            </p>
+          </div>
 
-          <Reveal delay={80}>
-            <h1 className="mt-12 text-white">
-              <span className="t-display block">Jefferson</span>
-              <span className="t-display block text-signal">Policy</span>
-              <span className="t-display block">Debate</span>
-            </h1>
-          </Reveal>
+          <h1 className="mt-12 text-white">
+            <span className="t-display block">Jefferson</span>
+            <span className="t-display block text-signal">Policy</span>
+            <span className="t-display block">Debate</span>
+          </h1>
 
           <div className="mt-14 u-grid-12 items-end">
-            <Reveal delay={160} className="col-span-12 lg:col-span-6">
+            <div className="col-span-12 lg:col-span-6">
               <div className="border-l-4 border-signal pl-7">
                 <p className="text-lg leading-relaxed text-white/75">
                   A student-led program built on year-long research, evidence, and argument. Varsity and novice squads
@@ -94,26 +93,30 @@ export default async function HomePage() {
                   About the program
                 </ButtonLink>
               </div>
-            </Reveal>
+            </div>
 
-            <Reveal delay={240} className="col-span-12 lg:col-span-6 lg:col-start-8">
-              <dl className="grid grid-cols-3 border-t-2 border-white/20">
+            <div className="col-span-12 lg:col-span-6 lg:col-start-8">
+              <dl className="grid grid-cols-1 divide-y-2 divide-white/20 border-t-2 border-white/20 sm:grid-cols-3 sm:divide-x-2 sm:divide-y-0">
                 {[
-                  { label: "Active debaters", value: settings["figures.activeDebaters"] },
-                  { label: "Tournaments a year", value: settings["figures.tournamentsPerYear"] },
-                  { label: "Weekly meetings", value: String(MEETINGS.length) },
+                  // Published figures are the team's own approximate, officer-
+                  // edited numbers (see PUBLISHED_FIGURES), not a count this
+                  // application measured — an animated tally would claim a
+                  // precision the "+" already disclaims, so these render static.
+                  { label: "Active debaters", value: settings["figures.activeDebaters"], measured: false },
+                  { label: "Tournaments a year", value: settings["figures.tournamentsPerYear"], measured: false },
+                  { label: "Weekly meetings", value: String(MEETINGS.length), measured: true },
                 ].map((stat) => (
-                  <div key={stat.label} className="border-r-2 border-white/20 py-8 pr-4 last:border-r-0">
+                  <div key={stat.label} className="py-8 sm:pr-4">
                     <dd className="font-display text-4xl font-extrabold leading-none tracking-tight text-white lg:text-5xl">
-                      <CountUp value={stat.value} />
+                      {stat.measured ? <CountUp value={stat.value} /> : stat.value}
                     </dd>
-                    <dt className="mt-4 font-display text-[10px] font-bold uppercase leading-snug tracking-[0.16em] text-white/50">
+                    <dt className="mt-4 font-display text-[11px] font-bold uppercase leading-snug tracking-[0.16em] text-white/50">
                       {stat.label}
                     </dt>
                   </div>
                 ))}
               </dl>
-            </Reveal>
+            </div>
           </div>
         </div>
 
@@ -342,8 +345,12 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* ================================================================= CTA */}
-      <section className="relative overflow-hidden bg-signal">
+      {/* ================================================================= CTA
+          Marked so the sticky mobile join bar (components/site/BottomBars.tsx)
+          hides itself while this section is on screen — the page's own "How
+          to join" is the same call to action, and showing both at once is
+          redundant, not reinforcing. */}
+      <section data-hides-sticky-join-bar className="relative overflow-hidden bg-signal">
         <div className="c-grid-texture-dark absolute inset-0" aria-hidden="true" />
         <div className="u-container relative py-28 text-center md:py-36">
           <h2 className="t-h2 mx-auto max-w-3xl text-ink">Ready to start debating?</h2>

@@ -7,9 +7,9 @@ import { getSession } from "@/lib/auth/session";
  * Public shell. Every page in this group opens with a dark hero, so the header
  * is always transparent-until-scroll here.
  *
- * The bottom padding reserves room for the fixed join bar on small screens, so
- * it sits below the last row of footer links rather than on top of them. It is
- * dropped at `lg`, where that bar does not render.
+ * `BottomBars` renders whichever fixed bar applies (cookie notice or join bar)
+ * plus the in-flow spacer that reserves room for it below the footer, sized to
+ * that bar's real measured height rather than a constant.
  */
 export default async function PublicLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
@@ -21,9 +21,6 @@ export default async function PublicLayout({ children }: { children: React.React
         {children}
       </main>
       <SiteFooter />
-      {/* Matches the join bar's full height — its 60px min-height plus the 4px
-          top border — so the last row of footer links is never covered. */}
-      <div className="h-16 lg:hidden print:hidden" aria-hidden="true" />
       <BottomBars />
     </div>
   );
