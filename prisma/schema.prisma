@@ -10,8 +10,9 @@
 // regenerating migrations; no column types are SQLite-specific.
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../node_modules/.prisma/client"
+  provider   = "prisma-client-js"
+  output     = "../node_modules/.prisma/client"
+  engineType = "client"
 }
 
 datasource db {
